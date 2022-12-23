@@ -1,16 +1,18 @@
 function createSheet(){
-    document.getElementById('container').innerHTML="";
     sizeOfSheet=document.getElementById('getSize').value;
+    document.getElementById('getSize').value="";
     sizeOfSheet=+sizeOfSheet;
     sizeOfSheetOfSheet=sizeOfSheet;
 
-    console.log(typeof sizeOfSheet);
+    //console.log(typeof sizeOfSheet);
 
     if(Number.isInteger(sizeOfSheet)){
         if(sizeOfSheet<1||sizeOfSheet>64){
-            document.getElementById('getSize').value="Please enter a value..."
+            document.getElementById('errorMessage').textContent="Please enter a value from 1 to 64..."
             return;
         }
+        document.getElementById('errorMessage').textContent="";
+        document.getElementById('container').innerHTML="";
         //Create the row element
         let row=document.createElement('div');
         row.className="row";
@@ -48,6 +50,7 @@ function clearAll(){
     for(let i=0; i<allElements.length; i++){
         allElements[i].setAttribute('style', 'background-color: white;')
     }
+    document.getElementById('errorMessage').textContent="";
 }
 
 function changeColor(element){

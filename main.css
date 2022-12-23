@@ -13,6 +13,10 @@ body{
     flex-direction: row;
 }
 
+#errorMessage{
+    color: red;
+}
+
 .row{
     height: auto;
     width: auto;
