@@ -1,14 +1,14 @@
 function createSheet(){
     document.getElementById('container').innerHTML="";
-    let size=document.getElementById('getSize').value;
-    document.getElementById('getSize').value="";
-    size=+size;
+    sizeOfSheet=document.getElementById('getSize').value;
+    sizeOfSheet=+sizeOfSheet;
+    sizeOfSheetOfSheet=sizeOfSheet;
 
-    console.log(typeof size);
+    console.log(typeof sizeOfSheet);
 
-    if(Number.isInteger(size)){
-        if(size<1||size>64){
-
+    if(Number.isInteger(sizeOfSheet)){
+        if(sizeOfSheet<1||sizeOfSheet>64){
+            document.getElementById('getSize').value="Please enter a value..."
             return;
         }
         //Create the row element
@@ -19,29 +19,44 @@ function createSheet(){
         column.className="column";
         column.textContent=" ";
         //change color of square
-        column.setAttribute('onmousedown', "changeColor(this)");
+        column.setAttribute('onmouseover', "changeColor(this)");
 
-        //Add 'size' number of columns in each row
-        for(let i=1; i<=size; i++){
+        //Add 'sizeOfSheet' number of columns in each row
+        for(let i=1; i<=sizeOfSheet; i++){
             row.append(column.cloneNode(true));
         }
 
         console.log(row);
 
-        //Add 'size' number of rows to the container
-        for(i=1; i<=size; i++){
+        //Add 'sizeOfSheet' number of rows to the container
+        for(i=1; i<=sizeOfSheet; i++){
             document.getElementById("container").append(row.cloneNode(true));
         }
 
         console.log(document.getElementById("container"));
 
     }else {
-        document.getElementById('getSize').textContent="Please, an integer from one to 64...";
+        document.getElementById('getSizeOfSheet').textContent="Please, an integer from one to 64...";
+    }
+}
+
+function clearAll(){
+    //console.log('test');
+    let allElements=document.getElementsByClassName('column');
+    //console.log(allElements);
+    //allElements.setAttribute("style", "background-color: white;")
+    for(let i=0; i<allElements.length; i++){
+        allElements[i].setAttribute('style', 'background-color: white;')
     }
 }
 
 function changeColor(element){
-    console.log("the column is clicked")
+    element.setAttribute('style', 'background-color: black;')
+}
 
 
+function onload(){
+    document.getElementById('getSize').value=16;
+    sizeOfSheet=16;
+    createSheet();
 }

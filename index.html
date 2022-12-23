@@ -6,22 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch a sketch</title>
     <link rel="stylesheet" href="./main.css">
+    <script>var sizeOfSheet;</script>
+    <script src="./main.js" defer></script>
 </head>
-<body>
+<body onload="onload()">
     <div>
-        <label style="margin-right: 2px;">Enter the size of the sheet: <input id="getSize" type="number" value=""/></label><button onclick="createSheet()">Enter</button>
+        <label>Enter the size of the sheet: <input id="getSize" type="number" value=""/></label>
+        <button onclick="createSheet()">Enter</button>
+        <button onclick="clearAll()">Clear</button>
     </div>
     <br>
-    <div id="container">
-        <!-- <div class="row">
-            <div class="column">&#160</div>
-            <div class="column">&#160</div>
-        </div>
-        <div class="row">
-            <div class="column"></div>
-            <div class="column">&#160</div>
-        </div> -->
-    </div>
-    <script src="./main.js"></script>
+    <div id="container"></div>
 </body>
 </html>
