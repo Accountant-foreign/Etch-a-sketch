@@ -1,0 +1,46 @@
+body{
+    background-color: #D3D3D3;
+}
+
+#container{
+    margin: 40px;
+    height: 5in;
+    width: 5in;
+    background-color: white;
+    margin-left: 9cm;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.row{
+    height: auto;
+    width: auto;
+
+    display: flex;
+
+    flex: 1;
+
+    flex-direction: column;
+}
+
+.column{
+    flex: 1;
+}
+
+button{
+    border-radius: 5px;
+    transition: 0.15s;
+    border: white;
+    border: 1px;
+    background-color: black;
+    color: white;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+button:active{
+    opacity: 0.5;
+}
