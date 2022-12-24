@@ -4,7 +4,10 @@ var colorChoice=document.getElementById('colorChoice');
 
 rainbowBtn.onclick=()=>{setColor('rainbow');};
 eraserBtn.onclick=()=>{setColor('eraser')};
-colorChoice.oninput=(e)=>{let color=e.target.value; setColor(color)};
+colorChoice.oninput=(e)=>{
+    let color=e.target.value; 
+    setColor(color);
+};
 
 function setColor(switchVAR){
     let allElements=document.getElementsByClassName('column');
