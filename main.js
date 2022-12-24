@@ -4,7 +4,7 @@ var colorChoice=document.getElementById('colorChoice');
 
 rainbowBtn.onclick=()=>{setColor('rainbow');};
 eraserBtn.onclick=()=>{setColor('eraser')};
-colorChoice.oninput=(e)=>{setColor(color)};
+colorChoice.oninput=(e)=>{let color=e.target.value; setColor(color)};
 
 function setColor(switchVAR){
     let allElements=document.getElementsByClassName('column');
@@ -75,23 +75,32 @@ function rgbColor(){
 }
 
 function changeColor(){
-    switch (arguments[1]) {
-        case "black":
-            arguments[0].setAttribute('style', 'background-color: black;')
-            break;
+    // switch (arguments[1]) {
+    //     case "black":
+    //         arguments[0].setAttribute('style', 'background-color: black;')
+    //         break;
         
-        case "eraser":
-            arguments[0].setAttribute('style', 'background-color: ')
-            break;
+    //     case "eraser":
+    //         arguments[0].setAttribute('style', 'background-color: ')
+    //         break;
 
-        case "rainbow":
-            let getRandomColor=rgbColor();
-            arguments[0].setAttribute('style', `background-color: ${getRandomColor};`)
-            break;
+    //     case "rainbow":
+    //         let getRandomColor=rgbColor();
+    //         arguments[0].setAttribute('style', `background-color: ${getRandomColor};`)
+    //         break;
 
-        default:
-            arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
-            break;
+    //     default:
+    //         arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
+    //         break;
+    // }
+    if(arguments[1]=="black"){
+        arguments[0].setAttribute('style', 'background-color: black;')
+    } else if(arguments[1]=="eraser"){
+        arguments[0].setAttribute('style', 'background-color: ')
+    } else if(arguments[1]=="rainbow"){
+        arguments[0].setAttribute('style', `background-color: ${rgbColor()};`)
+    } else {
+        arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
     }
     //element.setAttribute('style', 'background-color: black;')
 }
