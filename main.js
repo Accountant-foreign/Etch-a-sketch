@@ -75,24 +75,6 @@ function rgbColor(){
 }
 
 function changeColor(){
-    // switch (arguments[1]) {
-    //     case "black":
-    //         arguments[0].setAttribute('style', 'background-color: black;')
-    //         break;
-        
-    //     case "eraser":
-    //         arguments[0].setAttribute('style', 'background-color: ')
-    //         break;
-
-    //     case "rainbow":
-    //         let getRandomColor=rgbColor();
-    //         arguments[0].setAttribute('style', `background-color: ${getRandomColor};`)
-    //         break;
-
-    //     default:
-    //         arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
-    //         break;
-    // }
     if(arguments[1]=="black"){
         arguments[0].setAttribute('style', 'background-color: black;')
     } else if(arguments[1]=="eraser"){
