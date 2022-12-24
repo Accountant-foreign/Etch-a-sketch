@@ -7,14 +7,20 @@
     <title>Etch a sketch</title>
     <link rel="stylesheet" href="./main.css">
     <script>var sizeOfSheet;</script>
+    <script>var currentColor;</script>
     <script src="./main.js" defer></script>
 </head>
 <body onload="onload()">
-    <div>
-        <label>Enter the size of the sheet: <input id="getSize" type="number" value=""/></label>
-        <button onclick="createSheet()">Enter</button>
-        <button onclick="clearAll()">Clear</button>
-    </div>
+        <div class="flexEm">
+            <label>Enter the size of the sheet: <input id="getSize" type="number" value=""/></label>
+            <button onclick="createSheet()">Enter</button>
+            <button onclick="clearAll()">Clear</button>
+            <button id="rainbow">Rainbow</button>
+            <button id="eraser">Eraser</button>
+        </div>
+        <div class="flexEm" style="margin-left: 10px;">
+            <label>Pick a color you want: <input id="colorChoice" type="color" value="#000000" /></label>
+        </div>
     <br>
     <div id="errorMessage"></div>
     <br>

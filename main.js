@@ -1,3 +1,19 @@
+var rainbowBtn=document.getElementById('rainbow');
+var eraserBtn=document.getElementById('eraser');
+var colorChoice=document.getElementById('colorChoice');
+
+rainbowBtn.onclick=()=>{setColor('rainbow');};
+eraserBtn.onclick=()=>{setColor('eraser')};
+colorChoice.oninput=(e)=>{setColor(color)};
+
+function setColor(switchVAR){
+    let allElements=document.getElementsByClassName('column');
+    allElements=Array.from(allElements);
+    allElements.forEach(element => {
+        element.setAttribute('onmouseover', `changeColor(this, '${switchVAR}')`)
+    });
+}
+
 function createSheet(){
     sizeOfSheet=document.getElementById('getSize').value;
     document.getElementById('getSize').value="";
@@ -21,7 +37,7 @@ function createSheet(){
         column.className="column";
         column.textContent=" ";
         //change color of square
-        column.setAttribute('onmouseover', "changeColor(this)");
+        column.setAttribute('onmouseover', "changeColor(this, 'black')");
 
         //Add 'sizeOfSheet' number of columns in each row
         for(let i=1; i<=sizeOfSheet; i++){
@@ -43,20 +59,42 @@ function createSheet(){
 }
 
 function clearAll(){
-    //console.log('test');
     let allElements=document.getElementsByClassName('column');
-    //console.log(allElements);
-    //allElements.setAttribute("style", "background-color: white;")
     for(let i=0; i<allElements.length; i++){
         allElements[i].setAttribute('style', 'background-color: white;')
     }
     document.getElementById('errorMessage').textContent="";
 }
 
-function changeColor(element){
-    element.setAttribute('style', 'background-color: black;')
+function rgbColor(){
+    let r=Math.floor(Math.random() * 256);
+    let g=Math.floor(Math.random() * 256);
+    let b=Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
+function changeColor(){
+    switch (arguments[1]) {
+        case "black":
+            arguments[0].setAttribute('style', 'background-color: black;')
+            break;
+        
+        case "eraser":
+            arguments[0].setAttribute('style', 'background-color: ')
+            break;
+
+        case "rainbow":
+            let getRandomColor=rgbColor();
+            arguments[0].setAttribute('style', `background-color: ${getRandomColor};`)
+            break;
+
+        default:
+            arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
+            break;
+    }
+    //element.setAttribute('style', 'background-color: black;')
+}
 
 function onload(){
     document.getElementById('getSize').value=16;
