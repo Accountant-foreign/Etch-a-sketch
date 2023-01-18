@@ -1,97 +1,67 @@
-var rainbowBtn=document.getElementById('rainbow');
-var eraserBtn=document.getElementById('eraser');
-var colorChoice=document.getElementById('colorChoice');
+let flag=false;
+let currentColor="black";
+window.onmouseup = () => {flag = false;}
+window.onmousedown = () => {flag = true;}
 
-rainbowBtn.onclick=()=>{setColor('rainbow');};
-eraserBtn.onclick=()=>{setColor('eraser')};
-colorChoice.oninput=(e)=>{
-    let color=e.target.value; 
-    setColor(color);
+let cell=document.createElement('div'); 
+cell.className="cell";
+
+let container=document.getElementById('container');
+let sliderInput=document.getElementById('range');
+let size=document.getElementById('size');
+sliderInput.oninput=()=>{
+    createSheet();
+    size.textContent=`${+(sliderInput.value)}x${+(sliderInput.value)}`;
 };
-
-function setColor(switchVAR){
-    let allElements=document.getElementsByClassName('column');
-    allElements=Array.from(allElements);
-    allElements.forEach(element => {
-        element.setAttribute('onmouseover', `changeColor(this, '${switchVAR}')`)
-    });
+document.body.onload=createSheet();
+document.getElementById('clear').onclick= () => createSheet();
+document.getElementById('eraser').onclick=()=> doAccordingToMode('eraser');
+document.getElementById('rainbow').onclick=()=> doAccordingToMode('rainbow');
+document.getElementById('colorChoice').oninput = (e) => {
+    let color=e.target.value;
+    currentColor=color;
+    doAccordingToMode('color');
 }
 
-function createSheet(){
-    sizeOfSheet=document.getElementById('getSize').value;
-    document.getElementById('getSize').value="";
-    sizeOfSheet=+sizeOfSheet;
-    sizeOfSheetOfSheet=sizeOfSheet;
-
-    //console.log(typeof sizeOfSheet);
-
-    if(Number.isInteger(sizeOfSheet)){
-        if(sizeOfSheet<1||sizeOfSheet>64){
-            document.getElementById('errorMessage').textContent="Please enter a value from 1 to 64..."
-            return;
-        }
-        document.getElementById('errorMessage').textContent="";
-        document.getElementById('container').innerHTML="";
-        //Create the row element
-        let row=document.createElement('div');
-        row.className="row";
-        //Create the column element
-        let column=document.createElement('div');
-        column.className="column";
-        column.textContent=" ";
-        //change color of square
-        column.setAttribute('onmouseover', "changeColor(this, 'black')");
-
-        //Add 'sizeOfSheet' number of columns in each row
-        for(let i=1; i<=sizeOfSheet; i++){
-            row.append(column.cloneNode(true));
-        }
-
-        console.log(row);
-
-        //Add 'sizeOfSheet' number of rows to the container
-        for(i=1; i<=sizeOfSheet; i++){
-            document.getElementById("container").append(row.cloneNode(true));
-        }
-
-        console.log(document.getElementById("container"));
-
-    }else {
-        document.getElementById('getSizeOfSheet').textContent="Please, an integer from one to 64...";
-    }
-}
-
-function clearAll(){
-    let allElements=document.getElementsByClassName('column');
-    for(let i=0; i<allElements.length; i++){
-        allElements[i].setAttribute('style', 'background-color: white;')
-    }
-    document.getElementById('errorMessage').textContent="";
-}
-
-function rgbColor(){
+function generateRGB(){
     let r=Math.floor(Math.random() * 256);
     let g=Math.floor(Math.random() * 256);
     let b=Math.floor(Math.random() * 256);
 
     return `rgb(${r}, ${g}, ${b})`;
 }
+function createSheet(){
+    container.innerHTML="";
+    let sizeOfSheet=+(sliderInput.value);
+    container.style.gridTemplateColumns=`repeat(${sizeOfSheet}, 1fr)`;
+    container.style.gridTemplateRows=`repeat(${sizeOfSheet}, 1fr)`;
+    for (let i = 0; i < sizeOfSheet; i++) {
 
-function changeColor(){
-    if(arguments[1]=="black"){
-        arguments[0].setAttribute('style', 'background-color: black;')
-    } else if(arguments[1]=="eraser"){
-        arguments[0].setAttribute('style', 'background-color: ')
-    } else if(arguments[1]=="rainbow"){
-        arguments[0].setAttribute('style', `background-color: ${rgbColor()};`)
-    } else {
-        arguments[0].setAttribute('style', `background-color: ${arguments[1]};`)
+        for(let j=0; j<sizeOfSheet; j++){
+            let clonedCell=cell.cloneNode(true);
+            clonedCell.onmouseover = () => {
+                if(flag) clonedCell.style.backgroundColor=currentColor;
+            }
+            container.append(clonedCell);
+        }
     }
-    //element.setAttribute('style', 'background-color: black;')
 }
 
-function onload(){
-    document.getElementById('getSize').value=16;
-    sizeOfSheet=16;
-    createSheet();
+function doAccordingToMode(mode){
+    let cells=Array.from(document.getElementsByClassName('cell'));
+    cells.forEach(cell => {
+        cell.onmouseover = () => {
+            if(flag) {
+                if(mode=='eraser'){
+                    cell.style.backgroundColor='white';
+                }
+                if(mode=='rainbow'){
+                    cell.style.backgroundColor=generateRGB();
+                }
+                if(mode=='color'){
+                    cell.style.backgroundColor=currentColor;
+                }
+            }
+        }
+    });
 }
